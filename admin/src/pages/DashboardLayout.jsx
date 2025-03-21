@@ -1,30 +1,33 @@
+
 import React from 'react'
+import Sidebar from '../components/Sidebar'
 import { Outlet } from 'react-router-dom'
-import Topbar from "../components/Topbar";
-import Sidebar from "../components/Sidebar";
+// import Topbar from '../components/Topbar'
+
 const DashboardLayout = () => {
   return (
-    <div>
-      <div className="grid grid-cols-1 md:grid-cols-5 min-h-screen">
-       
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-6 h-screen">
         {/* Sidebar Menu */}
-        <aside className=" text-white w-full h-full p-6 pt-0 ps-0 md:col-span-1">
-          <Sidebar />
+        <aside className="bg-white text-white p-6 pt-0 ps-0 md:col-span-1">
+            <Sidebar />
         </aside>
 
         {/* Main Content */}
-        <main className="bg-white dark:bg-gray-700 p-3 mt-1 md:col-span-4">
+        <main className="bg-slate-100 dark:bg-gray-700 p-6 md:col-span-5">
           <div className='mb-3'>
-            <Topbar />
-          
+            {/* <Topbar /> */}
+            <h1>Topbar</h1>
           </div>
-         
+          
+
           <div className='ChildPages'>
             <Outlet />
-          </div>
+          </div>  
         </main>
       </div>
-    </div>
+
+    </>
   )
 }
 

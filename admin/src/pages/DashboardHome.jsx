@@ -1,36 +1,32 @@
-import React from 'react';
-import { Home } from 'lucide-react';
-import mypic from '../assets/my image.jpg'; //
+import React from 'react'
+import DashboardCards from '../components/dashboard/DashboardCard';
+import PieChartComponent from '../components/dashboard/PieChartComponent';
+import AccountInformation from '../components/dashboard/AccountInformation';
+import TotalProgressChart from '../components/dashboard/TotalProgressChart';
 
 const DashboardHome = () => {
   return (
-    <div className="w-full border-b border-gray-200 bg-white flex items-center justify-between px-6 py-4">
-      {/* Left side - Dashboard title and features */}
-      <div className="flex items-center space-x-4">
-        <div className="w-10 h-10 rounded-full bg-teal-500 flex items-center justify-center">
-          <img 
-            src={mypic}
-            alt="Dashboard Logo" 
-            className=" object-cover rounded-full"
-          />
-        </div>
-        <div>
-          <h1 className="text-teal-600 font-medium text-xl">Dashboard</h1>
-          <p className="text-gray-500 text-sm">Dashboard Features</p>
-        </div>
+    <>
+      <div className='mb-3'>
+        <h1 className='text-3xl mb-3'>Welcome back to admin</h1>
+        <DashboardCards />
       </div>
-      
-      {/* Right side - Breadcrumb navigation */}
-      <div className="flex items-center text-sm text-gray-500">
-        <div className="flex items-center">
-          <Home size={16} className="text-gray-400" />
-          <span className="mx-2">Home</span>
-          <span className="mx-2">/</span>
-          <span className="text-gray-700">Dashboard</span>
+      <div className="grid grid-cols-6 gap-4">
+        {/* Account Information - Takes 2 columns */}
+        <div className="col-span-4">
+          <AccountInformation />
+         <TotalProgressChart/>
+       
         </div>
-      </div>
-    </div>
-  );
-};
 
-export default DashboardHome;
+        {/* Pie Chart Component - Takes 1 column */}
+        <div className="col-span-2">
+          <PieChartComponent />
+        </div>
+      </div>
+
+    </>
+  )
+}
+
+export default DashboardHome
