@@ -1,11 +1,11 @@
 const express = require('express');
 const { getAllAppointments, bookAppointment, updateAppointmentStatus } = require('../controllers/appointment.controller');
-const { authMiddleware,  verifyStaff } = require('../middlewares/auth.middleware');
+const { authMiddleware } = require('../middlewares/auth.middleware');
 
 const appointmentRouter = express.Router();
 
-appointmentRouter.get('/all', authMiddleware, verifyStaff, getAllAppointments); // Admin & Staff
-appointmentRouter.post('/bookAppointment', authMiddleware, verifyStaff, bookAppointment); // Staff
-appointmentRouter.put('/updateAppointment/:id/status', authMiddleware, verifyStaff, updateAppointmentStatus); // Admin & Doctor
+appointmentRouter.get('/all',   getAllAppointments); // Admin & Staff
+appointmentRouter.post('/bookAppointment',   bookAppointment); // Staff
+appointmentRouter.put('/updateAppointment/:id/status',  updateAppointmentStatus); // Admin & Doctor
 
 module.exports = appointmentRouter;

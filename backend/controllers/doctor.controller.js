@@ -3,6 +3,7 @@ const Doctor = require("../models/Doctors.model");
 // // ✅ Add a new doctor (Admin)
 const createDoctor = async (req, res) => {
   try {
+    console.log("Incoming request:", req.body);
     const newDoctor = new Doctor(req.body);
     await newDoctor.save();
     res.status(201).json({ message: "Doctor added successfully", doctor: newDoctor });
@@ -17,6 +18,7 @@ const getAllDoctors = async (req, res) => {
     const doctors = await Doctor.find();
     res.status(200).json(doctors);
   } catch (error) {
+    console.error("Error creating doctor:", error);
     res.status(500).json({ message: "Failed to retrieve doctors", error });
   }
 };

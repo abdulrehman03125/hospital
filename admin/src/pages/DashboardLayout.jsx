@@ -2,7 +2,7 @@
 import React from 'react'
 import Sidebar from '../components/Sidebar'
 import { Outlet } from 'react-router-dom'
-// import Topbar from '../components/Topbar'
+import Topbar from '../components/Topbar'
 
 const DashboardLayout = () => {
   return (
@@ -16,8 +16,8 @@ const DashboardLayout = () => {
         {/* Main Content */}
         <main className="bg-slate-100 dark:bg-gray-700 p-6 md:col-span-5">
           <div className='mb-3'>
-            {/* <Topbar /> */}
-            <h1>Topbar</h1>
+            <Topbar />
+            {/* <h1>Topbar</h1> */}
           </div>
           
 

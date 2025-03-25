@@ -16,7 +16,7 @@ import AddAppointment from './pages/dashboard/AddAppointment';
 import Notfound from './pages/Notfound';
 import Login from './pages/Login';
 
-
+import { ToastContainer } from "react-toastify";
 function App() {
   // const [count, setCount] = useState(0)
 
@@ -25,6 +25,7 @@ function App() {
    <>
    {/* <PatientForm/> */}
   {/* <PatientList/> */}
+  <ToastContainer position="top-right" autoClose={3000} />
    <Routes>
    <Route index element={<Login />} />
     <Route path='/' element={<Home/>}/>

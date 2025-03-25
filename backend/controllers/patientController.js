@@ -9,12 +9,12 @@ const createPatient = async (req, res) => {
     try {
         // const { name, age, gender, contactInfo, medicalHistory, currentMedications } = req.body;
 
-        const newPatient = new Patient(req.body);
-        await newPatient.save();
+        const newpatient = new Patient(req.body);
+        await newpatient.save();
 
-        res.status(201).json({ message: "patients added successfully", patient: newPatient });
+        res.status(201).json({ message: "patients added successfully"});
     } catch (error) {
-        res.status(500).json({ message: "Failed to add patients", error });
+        res.status(400).json({ error: error.message });
     }
 }
 

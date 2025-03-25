@@ -7,9 +7,10 @@ const Login = () => {
     const [errors, setErrors] = useState(null);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-
+ 
+    // Login API used sucess full 
     const onFinish = (values) => {
-        console.log("Login Success:", values);
+        // console.log("Login Success:", values);
         axios.post("http://localhost:3002/User/login", values).then((res) => {
             if (res.data.status === "Ok") {
                 navigate("/dashboard")
@@ -39,6 +40,7 @@ const Login = () => {
                     </ul>
                 </div>
             }
+
             <Form onFinish={onFinish}>
                 <Form.Item name="email" rules={[{ required: true, message: "Please enter your email!", type: "email" }]}>
                     <Input size="large" placeholder="Email" />
