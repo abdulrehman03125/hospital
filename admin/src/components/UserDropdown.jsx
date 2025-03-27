@@ -1,14 +1,25 @@
 import React from "react";
 import { Dropdown, Menu, Avatar, Typography } from "antd";
 import { UserOutlined, LogoutOutlined, EditOutlined, CaretDownOutlined } from "@ant-design/icons";
+// import { useDispatch } from 'react-redux';
+// import { logout } from '../redux/slices/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 const { Text } = Typography;
 
 const UserDropdown = () => {
+  // const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const user = {
     name: "Bryan Adams",
     role: "Admin",
     avatar: "https://randomuser.me/api/portraits/women/44.jpg", // Replace with actual avatar URL
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/login'); // Redirect to login page after logout
   };
 
   const menu = (
@@ -16,7 +27,7 @@ const UserDropdown = () => {
       <Menu.Item key="edit" icon={<EditOutlined />}>
         Edit Profile
       </Menu.Item>
-      <Menu.Item key="logout" icon={<LogoutOutlined />} danger>
+      <Menu.Item key="logout" icon={<LogoutOutlined />} danger onClick={handleLogout}>
         Logout
       </Menu.Item>
     </Menu>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Upload, User, Mail, Lock, Phone, Calendar, Briefcase, CheckCircle, XCircle } from "lucide-react";
+import {  CheckCircle, XCircle } from "lucide-react";
 
 const DoctorForm = () => {
   const [formData, setFormData] = useState({

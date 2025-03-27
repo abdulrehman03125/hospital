@@ -19,6 +19,7 @@ const patientSchema = new mongoose.Schema({
     mobileNo: {
         type: String,
         required: true,
+        unique: false ,
         match: /^[0-9]{11}$/ // Validates 11-digit phone number
     },
     address: {
@@ -28,7 +29,7 @@ const patientSchema = new mongoose.Schema({
     cnic: {
         type: String,
         required: true,
-        unique: true,
+        unique: false,
         match: /^[0-9]{5}-[0-9]{7}-[0-9]{1}$/ // CNIC format: 12345-1234567-1
     },
     bloodGroup: {

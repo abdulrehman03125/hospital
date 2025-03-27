@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Home, User, Calendar, FileText, CreditCard, Stethoscope, Users, Clipboard, BriefcaseMedical, Wallet, ChevronDown, ChevronRight, Menu } from "lucide-react";
-
+import image from "../assets/myimage.png"
 export default function Sidebar() {
   const [openMenus, setOpenMenus] = useState({});
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -23,11 +23,11 @@ export default function Sidebar() {
         <div className="flex flex-col items-center mb-6">
           <div className="text-2xl font-bold text-cyan-400">Hospital</div>
           <img
-            src="https://via.placeholder.com/50"
+            src={image}
             alt="Profile"
             className="w-16 h-16 rounded-full mt-4"
           />
-          <div className="mt-2 font-semibold">TAREKUL ISLAM</div>
+          <div className="mt-2 font-semibold">Abdul Rahman</div>
           <span className="text-green-400 text-sm">● Admin</span>
         </div>
         <nav className="flex-1 overflow-y-auto pb-4">
@@ -98,16 +98,6 @@ export default function Sidebar() {
             <li>
               <NavLink to="/insurance" className="flex items-center gap-2 p-2 hover:bg-blue-800 rounded">
                 <CreditCard size={20} /> Insurance
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/billing" className="flex items-center gap-2 p-2 hover:bg-blue-800 rounded">
-                <Wallet size={20} /> Billing
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/billing" className="flex items-center gap-2 p-2 hover:bg-blue-800 rounded">
-                <Wallet size={20} /> Billing
               </NavLink>
             </li>
             <li>

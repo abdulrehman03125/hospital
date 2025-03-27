@@ -15,6 +15,7 @@ import ScheduleList from './pages/dashboard/ScheduleList';
 import AddAppointment from './pages/dashboard/AddAppointment';
 import Notfound from './pages/Notfound';
 import Login from './pages/Login';
+import PritectedRoute from "./components/ProtectedRoute"
 
 import { ToastContainer } from "react-toastify";
 function App() {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Pencil, Trash2, Eye } from "lucide-react";
 import { toast } from "react-toastify";
 import DoctorDetails from "./DoctorDetails";
-import DoctorForm from "./DoctorForm";
+// import DoctorForm from "./DoctorForm";
 
 const DoctorList = () => {
   const [doctors, setDoctors] = useState([]);
@@ -45,12 +45,6 @@ const DoctorList = () => {
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">Doctor List</h2>
-      <button
-        className="mb-4 bg-blue-500 text-white px-4 py-2 rounded"
-        onClick={() => setEditDoctor({ name: "", department: "", specialization: "", email: "", mobile: "" })}
-      >
-        Add New Doctor
-      </button>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200 shadow-md">
           <thead>

@@ -1,129 +1,106 @@
-import { useEffect, useState } from "react";
-import { Table, Button, Space, Modal } from "antd";
+import React, { useState, useEffect } from "react";
+import { Pencil, Trash2, Eye } from "lucide-react";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
+import PatientDetails from "./details/PatientDetails"
+// import PatientForm from "./PatientForm";
 
 const PatientList = () => {
   const [patients, setPatients] = useState([]);
   const [selectedPatient, setSelectedPatient] = useState(null);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const fetchPatients = () => {
-    fetch("http://localhost:3002/patients/all")
-      .then((res) => res.json())
-      .then((data) => setPatients(data))
-      .catch((error) => {
-        console.error("Error fetching patients:", error);
-        toast.error("Failed to fetch patients");
-      });
-  };
+  const [editPatient, setEditPatient] = useState(null);
 
   useEffect(() => {
     fetchPatients();
   }, []);
 
-  const handleDelete = (id) => {
-    Modal.confirm({
-      title: "Are you sure you want to delete this patient permanently?",
-      content: "This action cannot be undone.",
-      okText: "Delete",
-      okType: "danger",
-      cancelText: "Cancel",
-      onOk: () => {
-        fetch(`http://localhost:3002/patients/delete/${id}`, { method: "DELETE" })
-          .then((res) => {
-            if (res.ok) {
-              toast.success("Patient deleted successfully");
-              fetchPatients(); // Refresh the list after deletion
-            } else {
-              return res.json().then((data) => {
-                throw new Error(data.message || "Failed to delete patient");
-              });
-            }
-          })
-          .catch((error) => toast.error(error.message));
-      },
-    });
+  const fetchPatients = async () => {
+    try {
+      const response = await fetch("http://localhost:3002/patients/all/");
+      const data = await response.json();
+      setPatients(data);
+    } catch (error) {
+      toast.error("Error fetching patients!");
+    }
   };
 
-  const handleViewDetails = (patient) => {
-    setSelectedPatient(patient);
-    setIsModalVisible(true);
-  };
+  const deletePatient = async (patientId) => {
+    if (!window.confirm("Are you sure you want to delete this patient?")) return;
 
-  const columns = [
-    {
-      title: "SL.NO",
-      dataIndex: "slNo",
-      key: "slNo",
-      render: (_, __, index) => index + 1,
-    },
-    {
-      title: "ID No.",
-      dataIndex: "id",
-      key: "id",
-    },
-    {
-      title: "First Name",
-      dataIndex: "firstName",
-      key: "firstName",
-    },
-    {
-      title: "Mobile No",
-      dataIndex: "mobileNo",
-      key: "mobileNo",
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-    },
-    {
-      title: "Sex",
-      dataIndex: "sex",
-      key: "sex",
-    },
-    {
-      title: "Blood Group",
-      dataIndex: "bloodGroup",
-      key: "bloodGroup",
-    },
-    {
-      title: "Action",
-      key: "action",
-      render: (_, record) => (
-        <Space>
-          <Button type="default" icon={<EyeOutlined />} onClick={() => handleViewDetails(record)} />
-          <Button type="primary" icon={<EditOutlined />} />
-          <Button type="danger" icon={<DeleteOutlined />} onClick={() => handleDelete(record.id)} />
-        </Space>
-      ),
-    },
-  ];
+    try {
+      const response = await fetch(`http://localhost:3002/patients/delete/${patientId}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        toast.success("Patient deleted successfully!");
+        setPatients(patients.filter((patient) => patient._id !== patientId));
+      } else {
+        toast.error("Failed to delete patient!");
+      }
+    } catch (error) {
+      toast.error("An error occurred while deleting the patient!");
+    }
+  };
 
   return (
-    <div className="container mx-auto p-6">
-      <h2 className="text-xl font-bold mb-4">Patient Details</h2>
-      <Table dataSource={patients} columns={columns} rowKey="id" />
-
-      <Modal
-        title="Patient Details"
-        visible={isModalVisible}
-        onCancel={() => setIsModalVisible(false)}
-        footer={null}
+    <div className="p-6">
+      <h2 className="text-2xl font-bold mb-4">Patient List</h2>
+      <button
+        className="mb-4 bg-blue-500 text-white px-4 py-2 rounded"
+        onClick={() => setEditPatient({ name: "", age: "", gender: "", mobileNo: "", address: "", cnic: "", bloodGroup: "", medicalHistory: "", currentMedications: "" })}
       >
-        {selectedPatient && (
-          <div>
-            <p><strong>ID No.:</strong> {selectedPatient.id}</p>
-            <p><strong>First Name:</strong> {selectedPatient.firstName}</p>
-            <p><strong>Mobile No:</strong> {selectedPatient.mobileNo}</p>
-            <p><strong>Address:</strong> {selectedPatient.address}</p>
-            <p><strong>Sex:</strong> {selectedPatient.sex}</p>
-            <p><strong>Blood Group:</strong> {selectedPatient.bloodGroup}</p>
-          </div>
-        )}
-      </Modal>
+        Add New Patient
+      </button>
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white border border-gray-200 shadow-md">
+          <thead>
+            <tr className="bg-gray-100 text-left">
+              <th className="py-2 px-1 border">SL.NO</th>
+              <th className="py-2 px-1 border">Name</th>
+              <th className="py-2 px-1 border">Age</th>
+              <th className="py-2 px-1 border">Gender</th>
+              <th className="py-2 px-8 border">Mobile No</th>
+              <th className="py-2 px-4 border">CNIC</th>
+              <th className="py-2 px-4 border">Blood Group</th>
+              <th className="py-2 px-4 border">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {patients.length > 0 ? (
+              patients.map((patient, index) => (
+                <tr key={patient._id} className="border">
+                  <td className="py-2 text-center px-1 border">{index + 1}</td>
+                  <td className="py-2 px-1 border">{patient.name}</td>
+                  <td className="py-2 px-1 border">{patient.age}</td>
+                  <td className="py-2 px-1 border">{patient.gender}</td>
+                  <td className="py-2 px-8 border">{patient.mobileNo}</td>
+                  <td className="py-2 px-4 border">{patient.cnic}</td>
+                  <td className="py-2 px-4 border">{patient.bloodGroup}</td>
+
+                  <td className="py-2 px-4 border flex space-x-2">
+                    <button className="text-green-500 hover:text-green-700" onClick={() => setSelectedPatient(patient)}>
+                      <Eye size={18} />
+                    </button>
+                    <button className="text-blue-500 hover:text-blue-700" onClick={() => setEditPatient(patient)}>
+                      <Pencil size={18} />
+                    </button>
+                    <button className="text-red-500 hover:text-red-700" onClick={() => deletePatient(patient._id)}>
+                      <Trash2 size={18} />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="8" className="text-center py-4 text-gray-500">No patients found.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      {selectedPatient && <PatientDetails patient={selectedPatient} onClose={() => setSelectedPatient(null)} />}
+      {editPatient && <PatientForm patient={editPatient} onClose={() => setEditPatient(null)} refreshPatients={fetchPatients} />}
     </div>
   );
 };

@@ -12,7 +12,7 @@ const PieChartComponent = () => {
     <div className="flex flex-col bg-white items-center">
       {/* <LoaderPinwheel size={24}/> */}
       <h2 className="text-xl mt-10 font-semibold mb-4">Percentage (2025-03)</h2>
-      <PieChart width={350} height={350}>
+      <PieChart width={350} height={330}>
         <Pie
           data={data}
           cx="50%"
