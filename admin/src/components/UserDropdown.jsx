@@ -1,14 +1,14 @@
 import React from "react";
 import { Dropdown, Menu, Avatar, Typography } from "antd";
 import { UserOutlined, LogoutOutlined, EditOutlined, CaretDownOutlined } from "@ant-design/icons";
-// import { useDispatch } from 'react-redux';
-// import { logout } from '../redux/slices/authSlice';
+import { useDispatch } from 'react-redux';
+import { logout } from "../redux/authSlice"
 import { useNavigate } from 'react-router-dom';
 
 const { Text } = Typography;
 
 const UserDropdown = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const user = {

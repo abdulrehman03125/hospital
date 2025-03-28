@@ -15,36 +15,36 @@ import ScheduleList from './pages/dashboard/ScheduleList';
 import AddAppointment from './pages/dashboard/AddAppointment';
 import Notfound from './pages/Notfound';
 import Login from './pages/Login';
-import PritectedRoute from "./components/ProtectedRoute"
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import { ToastContainer } from "react-toastify";
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
-    
-   <>
-   {/* <PatientForm/> */}
-  {/* <PatientList/> */}
-  <ToastContainer position="top-right" autoClose={3000} />
-   <Routes>
-   <Route index element={<Login />} />
-    <Route path='/' element={<Home/>}/>
-    <Route path="/dashboard" element={<DashboardLayout/>}>
-    <Route index element={<DashboardHome/>}/>
-    <Route path='/dashboard/patient/createPatient' element={<PatientForm/>}/>
-    <Route path='/dashboard/patient/list' element={<PatientList/>}/>
-    <Route path='/dashboard/department/create' element={<DepartmentForm/>}/>
-    <Route path='/dashboard/department/list' element={<DepartmentList/>}/> 
-    <Route path='/dashboard/doctor/create' element={<DoctorForm/>} />
-    <Route path='/dashboard/doctor/list' element={<DoctorList/>}/>
-    <Route path='/dashboard/Schedule/create' element={<DoctorScheduleForm/>}/>
-    <Route path='/dashboard/Schedule/list' element={<ScheduleList/>}/>
-    <Route path='/dashboard/AddAppointment/create' element={<AddAppointment/>}/>
-    </Route>
-    <Route path='*' element={<Notfound />} />
-   </Routes>
-   </>
+
+    <>
+      {/* <PatientForm/> */}
+      {/* <PatientList/> */}
+      <ToastContainer position="top-right" autoClose={3000} />
+      <Routes>
+        <Route path='/' element={<Login />} />
+        <Route path='/home' element={<Home />} />
+        <Route path="/dashboard" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
+          <Route index element={<DashboardHome />} />
+          <Route path='patient/createPatient' element={<PatientForm />} />
+          <Route path='patient/list' element={<PatientList />} />
+          <Route path='department/create' element={<DepartmentForm />} />
+          <Route path='department/list' element={<DepartmentList />} />
+          <Route path='doctor/create' element={<DoctorForm />} />
+          <Route path='doctor/list' element={<DoctorList />} />
+          <Route path='Schedule/create' element={<DoctorScheduleForm />} />
+          <Route path='Schedule/list' element={<ScheduleList />} />
+          <Route path='AddAppointment/create' element={<AddAppointment />} />
+        </Route>
+        <Route path='*' element={<Notfound />} />
+      </Routes>
+    </>
   )
 }
 

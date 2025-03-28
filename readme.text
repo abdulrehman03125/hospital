@@ -1,0 +1,48 @@
+project name: hospital management system 
+Features: 
+
+
+Technologies Used
+
+Frontend: React.js
+
+Backend: Node.js (Express) with MongoDB
+
+Authentication: JWT (JSON Web Token)
+
+Database: MongoDB for data persistence
+
+
+Prerequisites
+
+Node.js and MongoDB installed.
+
+
+Key Features
+Admin /frontend 
+ Department Module
+
+Create, update, and manage hospital departments.
+
+View department statistics.
+
+2. Doctor Module
+
+Add and manage doctor profiles.
+
+Assign patients and track schedules.
+
+View doctor performance and availability.
+
+3. Patient Module
+
+Register new patients with medical history.
+
+Manage appointments and prescriptions.
+
+
+ zip file 
+# Install dependencies
+
+
+npm install
